@@ -55,7 +55,7 @@ def get_date(date_posted):
         date_posted = datetime.datetime.strptime(str(date_posted.date()), '%Y-%m-%d')
     else:
         date_posted = datetime.datetime.strptime(str(date_posted), '%d/%m/%Y')
-    return date_posted.strftime('%d-%m-%Y')
+    return date_posted.strftime('%Y-%m-%d')
 
 
 def get_image_href(img_tag):

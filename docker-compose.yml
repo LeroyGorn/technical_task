@@ -1,0 +1,44 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres:12.2
+    restart: always
+    environment:
+      POSTGRES_DB: parse_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4:4.18
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+      PGADMIN_LISTEN_PORT: 80
+    ports:
+      - "8080:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    links:
+      - "db:pgsql-server"
+
+  script:
+    build: ./
+    container_name: technical_task
+    working_dir: /technical_task
+    restart: on-failure
+    command: python main.py
+    volumes:
+      - ./src:/musician_hub/src
+    depends_on:
+      - postgres
+
+volumes:
+  db-data:
+  pgadmin-data:

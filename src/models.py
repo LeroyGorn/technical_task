@@ -4,7 +4,7 @@ import sqlalchemy as db
 
 
 Base = declarative_base()
-engine = db.create_engine('postgresql://postgres:admin@localhost/parse_db')
+engine = db.create_engine('postgresql://admin:secret@host.docker.internal/parse_db')
 
 
 class Ads(Base):

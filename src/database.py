@@ -10,7 +10,7 @@ table_objects = [Ads.__table__]
 
 
 class Database():
-    engine = db.create_engine('postgresql://postgres:admin@localhost/parse_db')
+    engine = db.create_engine('postgresql://admin:secret@host.docker.internal/parse_db')
 
     def __init__(self):
         self.connection = self.engine.connect()
